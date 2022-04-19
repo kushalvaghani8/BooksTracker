@@ -24,17 +24,22 @@ namespace BooksTracker
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+           
+
             if (Environment.IsDevelopment())
             {
-                services.AddMvc().AddRazorPagesOptions(options => {
+                services.AddMvc().AddRazorPagesOptions(options =>
+                {
                     options.Conventions.AddPageRoute("/Books/Index", "");
                 });
 
-               
+
             }
 
             services.AddDbContext<RazorPagesBookContext>(options =>
                     options.UseSqlite(Configuration.GetConnectionString("RazorPagesBookContext")));
+
+
         }
 
    

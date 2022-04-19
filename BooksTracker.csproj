@@ -13,14 +13,12 @@
     <None Remove="Microsoft.EntityFrameworkCore.Sqlite" />
     <None Remove="Data\" />
     <None Remove="Microsoft.EntityFrameworkCore" />
-    <None Remove="Migrations\" />
     <None Remove="Microsoft.EntityFrameworkCore.Relational" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pages\Models\" />
     <Folder Include="Pages\Books\" />
     <Folder Include="Data\" />
-    <Folder Include="Migrations\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
