@@ -4,7 +4,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.AspNetCore.Http;
+using System;
 
 namespace BooksTracker
 {
@@ -35,6 +36,8 @@ namespace BooksTracker
 
 
             }
+            //Adding caching
+            services.AddResponseCaching();
 
             services.AddDbContext<RazorPagesBookContext>(options =>
                     options.UseSqlite(Configuration.GetConnectionString("RazorPagesBookContext")));
@@ -61,7 +64,23 @@ namespace BooksTracker
             }
 
             app.UseHttpsRedirection();
+
+            app.UseResponseCaching();
+
+            app.Use(async (context, next) =>
+            {
+                context.Response.GetTypedHeaders().CacheControl =
+                new Microsoft.Net.Http.Headers.CacheControlHeaderValue()
+                {
+                    Public = true,
+                    MaxAge = TimeSpan.FromDays(10)
+                };
+                await next();
+            });
+
             app.UseStaticFiles();
+
+            
 
             app.UseRouting();
 
